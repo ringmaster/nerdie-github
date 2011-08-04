@@ -27,8 +27,8 @@ Notify.prototype.init = function () {
 		payload.commits.forEach(function(commit) {
 			bitly.shorten(commit.url, function(shorturl) {
 				console.log(shorturl);  // TODO Still having problems here, thinks the apikey isn't being sent?
-				if(shorturl.status == 200) {
-					url = shorturl.data;
+				if(shorturl.status_code == 200) {
+					url = shorturl.data.url;
 				}
 				else {
 					url = commit.url;
