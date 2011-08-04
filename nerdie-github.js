@@ -35,8 +35,8 @@ Notify.prototype.init = function () {
 					url = commit.url;
 				}
 				message = repo + commit.author.name + ' : ' + commit.message + ' -- ' + url;
-				for(i in config.announce[commit.repository.name]) {
-					nerdie.bot.say(config.announce[i], message);
+				for(i in config.announce[payload.repository.name]) {
+					nerdie.bot.say(config.announce[payload.repository.name], message);
 				}
 			});
 		});
