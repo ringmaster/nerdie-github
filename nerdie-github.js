@@ -14,20 +14,19 @@ function Notify(parentNerdie) {
 
 Notify.prototype.init = function () {
 	$('/notify').post(function(request, response, querystring, data) {
-		console.log(data.payload);
 		try{
 			payload = JSON.parse(data.payload);
 		}
 		catch(e) {
 			console.log('JSON Parsing Error', e);
 			$.write('JSON Parsing error:' + e);
+			return;
 		}
-		console.log(payload);
 		repo = '[' +payload.repository.name + '] ';
 		bitly = new Bitly(config.bitly_username, config.bitly_apikey);
 		payload.commits.forEach(function(commit) {
 			bitly.shorten(commit.url, function(shorturl) {
-				console.log(shorturl);
+				console.log(shorturl);  // TODO Still having problems here, thinks the apikey isn't being sent?
 				if(shorturl.status == 200) {
 					url = shorturl.data;
 				}
