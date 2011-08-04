@@ -9,7 +9,6 @@ function Notify(parentNerdie) {
 	this.pluginInterface = new NerdieInterface(parentNerdie, this);
 	nerdie = parentNerdie;
 	config = (nerdie.config.plugins.notify) ? nerdie.config.plugins.notify : {};
-	console.log('Bitly:', config.bitly_username, config.bitly_apikey);
 }
 
 Notify.prototype.init = function () {
@@ -26,7 +25,6 @@ Notify.prototype.init = function () {
 		bitly = new Bitly(config.bitly_username, config.bitly_apikey);
 		payload.commits.forEach(function(commit) {
 			bitly.shorten(commit.url, function(shorturl) {
-				console.log(shorturl);  // TODO Still having problems here, thinks the apikey isn't being sent?
 				if(shorturl.status_code == 200) {
 					url = shorturl.data.url;
 				}
